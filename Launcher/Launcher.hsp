@@ -1,0 +1,60 @@
+//GAME_Launcer v1.0
+//Copyright (c) H.Taido 2022
+screen 0,640,400
+cls 4
+color 255,255,255
+font "ＭＳ ゴシック",16
+mes ""
+mes "HONGO M.C.C. ｹﾞｰﾑ ﾂﾒｱﾜｾ"
+mes ""
+mes "MCC ゲームランチャー　ﾊﾞｰｼﾞｮﾝ 1.0"
+mes "Copyright (C) 2022 Hongo M.C.C./H.Taido "
+mes ""
+mes "お待ち下さい..."
+wait 60
+detail=""
+celload "320x144.png",1
+notesel detail
+noteload "detail.txt"
+cls
+title "M.C.C. ｼｪﾙ"
+color 0,0,170
+boxf 0,0,640,16
+color 0,255,255
+boxf 0,16,640,32
+color 0,170,170
+boxf 0,80,640,96
+pos 284,0
+color 255,255,255
+mes "M.C.C. ｼｪﾙ"
+color 0,0,0
+pos 0,16
+mes "　ﾌｧｲﾙ(F)  ｵﾌﾟｼｮﾝ(O)　表示(V)　ﾂﾘｰ(T)　ﾍﾙﾌﾟ(H)"
+mes "　"+dir_cur
+mes ""
+mes ""
+color 255,255,255
+pos 0,80
+mes "		ｻﾑﾈｲﾙ･ﾋﾟｸﾁｬ		|		ｹﾞｰﾑﾘｽﾄ"
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+color 0,170,170
+boxf 0,240,640,256
+color 255,255,255
+pos 0,240
+mes "					説明					"
+color 0,0,0
+mes detail
+color 0,255,255
+boxf 0,386,640,400
+color 0,0,0
+pos 0,384
+mes "　Z=ゲーム起動		X=READMEを読む"
+pos 0,96
+celput 1
