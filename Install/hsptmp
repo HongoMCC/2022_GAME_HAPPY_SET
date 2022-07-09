@@ -1,23 +1,411 @@
-//GAME_Luncer v1.0
-//Copyright (c) H.Taido 2022
+//Install-comannd
+//Copyright(c)H.Taido 2022
+#include "zipfile.as"
 screen 0,640,400
+title "Install"
+drv="D"
+dir=""
+*diskselect
 cls 4
+title "装置選択|Install"
 color 255,255,255
 font "ＭＳ ゴシック",16
+color 255,255,255
+pos 0,0
+mes " インストールコマンド		Ver. 1.0"
+color 0,252,252
+mes "────────────────── Copyright (C) Hongo M.C.C. / H.Taido 2022─"
 mes ""
-mes "HONGO M.C.C. ｹﾞｰﾑ ﾂﾒｱﾜｾ"
+color 255,255,255
+mes "プログラムファイルの展開を行います"
 mes ""
-mes "MCC ゲームランチャー　ﾊﾞｰｼﾞｮﾝ 1.0"
-mes "Copyright (C) 2022 Hongo M.C.C./H.Taido "
-mes ""
-mes "お待ち下さい..."
-wait 50
-cls
-color 0,0,170
-boxf 0,0,640,16
-color 0,255,255
-boxf 0,16,640,32
+mes "インストール先を選択してください"
 mes ""
 mes ""
 mes ""
-color 0,170,170
+mes ""
+boxf 64,160,160,176
+color 0,0,0
+mes "	固定ディスク"
+color 255,255,255
+mes ""
+mes "	フロッピィディスク"
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes "矢印キー（↑・↓）で項目を選択し、リターンキーを押してください"
+mes "（ＥＳＣキーを押すと処理を中止することができます）"
+s=0
+repeat
+stick key
+if key=2:redraw 0,64,160,208,208:color 0,0,0:boxf 64,160,208,208:color 255,255,255:boxf 64,160,160,176:color 0,0,0:pos 0,160:mes "	固定ディスク":color 255,255,255:mes "":mes "	フロッピィディスク":redraw 1,64,160,208,208:s=0
+if Key=8:redraw 0,64,160,208,208:color 0,0,0:boxf 64,160,208,208:color 255,255,255:boxf 64,192,208,208:color 255,255,255:pos 0,160:mes "	固定ディスク":color 0,0,0:mes "":mes "	フロッピィディスク":redraw 1,64,160,208,208:s=1
+if key=128:end
+if key=32:break
+await 1
+loop
+if s=1:goto *Floppy1
+if s=0:goto *Hard1
+stop
+*Floppy1
+cls 4
+title "フロッピィディスクの準備|Install"
+color 255,255,255
+font "ＭＳ ゴシック",16
+color 255,255,255
+pos 0,0
+mes " インストールコマンド		Ver. 1.0"
+color 0,252,252
+mes "────────────────── Copyright (C) Hongo M.C.C. / H.Taido 2022─"
+color 255,255,255
+mes "フロッピィディスクの準備"
+mes ""
+mes ""
+mes ""
+mes "プログラムファイルを展開するドライブを選択します"
+mes ""
+mes ""
+mes ""
+boxf 64,160,260,176
+color 0,0,0
+mes "	A: フロッピィディスク#1"
+color 255,255,255
+mes ""
+mes "	B: フロッピィディスク#2"
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes "矢印キー（↑・↓）で項目を選択し、リターンキーを押してください"
+mes "（ＥＳＣキーを押すと前の画面に戻ります）"
+s=0
+repeat
+stick key
+if key=2:redraw 0,64,160,576,208:color 0,0,0:boxf 64,160,576,208:color 255,255,255:boxf 64,160,260,176:color 0,0,0:pos 0,160:mes "	A: フロッピィディスク#1":color 255,255,255:mes "":mes "	B: フロッピィディスク#2":redraw 1,64,160,576,208:s=0
+if Key=8:redraw 0,64,160,576,208:color 0,0,0:boxf 64,160,576,208:color 255,255,255:boxf 64,192,260,208:color 255,255,255:pos 0,160:mes "	A: フロッピィディスク#1":color 0,0,0:mes "":mes "	B: フロッピィディスク#2":redraw 1,64,160,576,208:s=1
+if key=32:break
+if key=128:goto *diskselect
+await 1
+loop
+if s=0:type=1:terget="A:\\":goto *check
+if s=1:type=1:terget="B:\\":goto *check
+stop
+*Hard1
+	cls 4
+title "装置選択|Install"
+color 255,255,255
+font "ＭＳ ゴシック",16
+color 255,255,255
+pos 0,0
+mes " インストールコマンド		Ver. 1.0"
+color 0,252,252
+mes "────────────────── Copyright (C) Hongo M.C.C. / H.Taido 2022─"
+color 255,255,255
+mes "ディスクの準備"
+mes ""
+mes ""
+mes ""
+mes "プログラムファイルを展開するドライブを選択します"
+mes ""
+mes ""
+mes ""
+boxf 64,160,208,176
+color 0,0,0
+mes "	C: 固定ディスク#1"
+color 255,255,255
+mes ""
+mes "	その他のディスク"
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes "矢印キー（↑・↓）で項目を選択し、リターンキーを押してください"
+mes "（ＥＳＣキーを押すと前の画面に戻ります）"
+s=0
+repeat
+stick key
+if key=2:redraw 0,64,160,576,208:color 0,0,0:boxf 64,160,576,208:color 255,255,255:boxf 64,160,208,176:color 0,0,0:pos 0,160:mes "	C: 固定ディスク#1":color 255,255,255:mes "":mes "	その他のディスク":redraw 1,64,160,576,208:s=0
+if Key=8:redraw 0,64,160,576,208:color 0,0,0:boxf 64,160,576,208:color 255,255,255:boxf 64,192,224,208:color 255,255,255:pos 0,160:mes "	C: 固定ディスク#1":color 0,0,0:mes "":mes "	その他のディスク":redraw 1,64,160,576,208:s=1
+if key=32:break
+if key=128:goto *diskselect
+await 1
+loop
+if s=0:type="2":drv="C":goto *seldir
+if s=1:goto *Hard2
+*Hard2
+cls 4
+title "ディスクの準備|Install"
+color 255,255,255
+font "ＭＳ ゴシック",16
+color 255,255,255
+pos 0,0
+mes " インストールコマンド		Ver. 1.0"
+color 0,252,252
+mes "────────────────── Copyright (C) Hongo M.C.C. / H.Taido 2022─"
+color 255,255,255
+mes "その他のディスクの選択"
+mes ""
+mes ""
+mes ""
+mes "プログラムファイルを展開するドライブを選択します"
+mes ""
+mes "┌──── 接続状況 ────┐"
+newcom oFS,"Scripting.FileSystemObject"
+chrdrv=""
+repeat 26
+poke chrdrv, 0, 65+cnt
+if oFS("DriveExists",chrdrv+":") {
+oDrive=oFS("GetDrive", chrdrv+":")
+if oDrive("IsReady") {
+if oDrive("DriveType") == 0 : mes "│"+chrdrv+": 不明なドライブ　	    │"
+if oDrive("DriveType") == 1 : mes "│"+chrdrv+": ﾘﾑｰﾊﾞﾌﾞﾙ ﾃﾞｨｽｸ　	    │"
+if oDrive("DriveType") == 2 : mes "│"+chrdrv+": 固定ディスク装置	    │"
+if oDrive("DriveType") == 3 : mes "│"+chrdrv+": ﾈｯﾄﾜｰｸ ﾄﾞﾗｲﾌﾞ　 	    │"
+if oDrive("DriveType") == 4 : mes "│"+chrdrv+": CD-ROM　　　　　	    │"
+if oDrive("DriveType") == 5 : mes "│"+chrdrv+": RAMディスク　　 	    │"
+}
+}
+loop
+delcom oFS
+mes "└─────────────┘"
+pos 0,336
+mes "ドライブ名（アルファベット大一文字）を入力し、リターンキーを押してください"
+mes "ドライブ名="
+pos 96,352
+objmode 6
+objcolor 255,255,255
+rgbcolor $000000
+input drv,18,18,1
+color 255,255,255
+pos 0,368
+mes "（ＥＳＣキーを押すと前の画面に戻ります）"
+s=0
+repeat
+stick key
+if key=32:type=2:break
+if key=128:goto *Hard2
+await 1
+loop
+*seldir
+cls 4
+title "装置選択|Install"
+color 255,255,255
+font "ＭＳ ゴシック",16
+color 255,255,255
+pos 0,0
+mes " インストールコマンド		Ver. 1.0"
+color 0,252,252
+mes "────────────────── Copyright (C) Hongo M.C.C. / H.Taido 2022─"
+color 255,255,255
+mes "ディスクの準備"
+mes ""
+mes ""
+mes ""
+mes "プログラムファイルを展開するディレクトリを指定します"
+mes "ルートディレクトリからの完全パスを正しく入力してください。"
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes "展開先ディレクトリを入力し、リターンキーを押してください"
+mes "ディレクトリ名="+drv+":\\"
+pos 148,336
+objmode 6
+objcolor 255,255,255
+rgbcolor $000000
+input dir,400,18
+color 255,255,255
+pos 0,368
+mes "（ＥＳＣキーを押すと前の画面に戻ります）"
+s=0
+repeat
+stick key
+if key=32:terget=drv+":\\"+dir:break
+if key=128:goto *Hard1
+await 1
+loop
+*check
+cls 4
+title "展開先確認|Install"
+color 255,255,255
+font "ＭＳ ゴシック",16
+color 255,255,255
+pos 0,0
+mes " インストールコマンド		Ver. 1.0"
+color 0,252,252
+mes "────────────────── Copyright (C) Hongo M.C.C. / H.Taido 2022─"
+color 255,255,255
+mes "展開先の確認"
+mes ""
+mes ""
+mes ""
+mes "プログラムファイルの展開先は以下の通りです。"
+mes terget
+mes "よろしいですか"
+mes ""
+boxf 64,160,260,176
+color 0,0,0
+mes "	はい（展開開始）"
+color 255,255,255
+mes ""
+mes "	いいえ（処理の中止）"
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes "矢印キー（↑・↓）で項目を選択し、リターンキーを押してください"
+s=0
+repeat
+stick key
+if key=2:redraw 0,64,160,576,208:color 0,0,0:boxf 64,160,576,208:color 255,255,255:boxf 64,160,260,176:color 0,0,0:pos 0,160:mes "	はい（展開開始）":color 255,255,255:mes "":mes "	いいえ（処理の中止）":redraw 1,64,160,576,208:s=0
+if Key=8:redraw 0,64,160,576,208:color 0,0,0:boxf 64,160,576,208:color 255,255,255:boxf 64,192,260,208:color 255,255,255:pos 0,160:mes "	はい（展開開始）":color 0,0,0:mes "":mes "	いいえ（処理の中止）":redraw 1,64,160,576,208:s=1
+if key=32:break
+if key=128:goto *diskselect
+await 1
+loop
+if s=0:goto *startunzip
+if s=1:goto *diskselect
+stop
+*startunzip
+cls 4
+title "プログラムの展開|Install"
+color 255,255,255
+font "ＭＳ ゴシック",16
+color 255,255,255
+pos 0,0
+mes " インストールコマンド		Ver. 1.0"
+color 0,252,252
+mes "────────────────── Copyright (C) Hongo M.C.C. / H.Taido 2022─"
+color 255,255,255
+mes "プログラムの展開"
+mes ""
+mes ""
+mes ""
+mes "プログラムファイルを展開しています"
+mes "展開先="+terget
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes "（この操作は中止できません）"
+mes "しばらくお待ちください..."
+zipextract "BIN.zip",terget
+if stat:mes "展開に失敗しました。リターンキーを押して下さい。":s=1
+if stat=0:mes "展開に成功しました。リターンキーを押して下さい":s=0
+repeat
+stick key
+if key=32:break
+await 1
+loop
+if s=1:goto *cant
+if s=0:goto *ok
+*cant
+cls 4
+title "展開失敗|Install"
+color 255,255,255
+font "ＭＳ ゴシック",16
+color 255,255,255
+pos 0,0
+mes " インストールコマンド		Ver. 1.0"
+color 0,252,252
+mes "────────────────── Copyright (C) Hongo M.C.C. / H.Taido 2022─"
+color 255,255,255
+mes "プログラムの展開"
+mes ""
+mes ""
+mes ""
+mes "プログラムファイルの展開に失敗しました。"
+mes "展開先="+terget
+mes ""
+mes ""
+mes ""
+mes "詳細は添付のインストールガイドをご参照ください。"
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes "処理を中止しますのでリターンキーを押してください"
+mes "（ＥＳＣキーを押すと初めの画面に戻ります）"
+repeat
+stick key
+if key=32:end
+if key=128:goto *diskselect
+await 1
+loop
+*ok
+cls 4
+title "展開成功|Install"
+color 255,255,255
+font "ＭＳ ゴシック",16
+color 255,255,255
+pos 0,0
+mes " インストールコマンド		Ver. 1.0"
+color 0,252,252
+mes "────────────────── Copyright (C) Hongo M.C.C. / H.Taido 2022─"
+color 255,255,255
+mes "プログラムの展開"
+mes ""
+mes ""
+mes ""
+mes "プログラムファイルを正常に展開しました。"
+mes "展開先="+terget
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes "処理を終了しますのでリターンキーを押してください"
+mes "（ＥＳＣキーを押すと初めの画面に戻ります）"
+repeat
+stick key
+if key=32:end
+if key=128:goto *diskselect
+await 1
+loop

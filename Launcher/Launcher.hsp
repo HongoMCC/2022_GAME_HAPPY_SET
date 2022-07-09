@@ -1,23 +1,35 @@
 //GAME_Launcer v1.0
 //Copyright (c) H.Taido 2022
+#module
+#deffunc box int x1, int y1, int x2, int y2
+line x1, y1, x2, y1
+line x1, y1, x1, y2
+line x1, y2, x2, y2
+line x2, y1, x2, y2
+return
+#global
 screen 0,640,400
 cls 4
 color 255,255,255
-font "ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯",16
+font "‚l‚r ƒSƒVƒbƒN",16
 mes ""
-mes "HONGO M.C.C. ï½¹ï¾žï½°ï¾‘ ï¾‚ï¾’ï½±ï¾œï½¾"
+mes "HONGO M.C.C. ¹Þ°Ñ ÂÒ±Ü¾"
 mes ""
-mes "MCC ã‚²ãƒ¼ãƒ ãƒ©ãƒ³ãƒãƒ£ãƒ¼ã€€ï¾Šï¾žï½°ï½¼ï¾žï½®ï¾ 1.0"
+mes "MCC ƒQ[ƒ€ƒ‰ƒ“ƒ`ƒƒ[@ÊÞ°¼Þ®Ý 1.0"
 mes "Copyright (C) 2022 Hongo M.C.C./H.Taido "
 mes ""
-mes "ãŠå¾…ã¡ä¸‹ã•ã„..."
+mes "‚¨‘Ò‚¿‰º‚³‚¢..."
 wait 60
 detail=""
 celload "320x144.png",1
 notesel detail
 noteload "detail.txt"
+notesel gamelist
+noteload "gamelist.txt"
+game=1
+gb=96
 cls
-title "M.C.C. ï½¼ï½ªï¾™"
+title "M.C.C. ¼ªÙ"
 color 0,0,170
 boxf 0,0,640,16
 color 0,255,255
@@ -26,16 +38,16 @@ color 0,170,170
 boxf 0,80,640,96
 pos 284,0
 color 255,255,255
-mes "M.C.C. ï½¼ï½ªï¾™"
+mes "M.C.C. ¼ªÙ"
 color 0,0,0
 pos 0,16
-mes "ã€€ï¾Œï½§ï½²ï¾™(F)  ï½µï¾Œï¾Ÿï½¼ï½®ï¾(O)ã€€è¡¨ç¤º(V)ã€€ï¾‚ï¾˜ï½°(T)ã€€ï¾ï¾™ï¾Œï¾Ÿ(H)"
-mes "ã€€"+dir_cur
+mes "@Ì§²Ù(F)  µÌß¼®Ý(O)@•\Ž¦(V)@ÂØ°(T)@ÍÙÌß(H)"
+mes "@"+dir_cur
 mes ""
 mes ""
 color 255,255,255
 pos 0,80
-mes "		ï½»ï¾‘ï¾ˆï½²ï¾™ï½¥ï¾‹ï¾Ÿï½¸ï¾ï½¬		|		ï½¹ï¾žï½°ï¾‘ï¾˜ï½½ï¾„"
+mes "		»ÑÈ²Ù¥Ëß¸Á¬		|		¹Þ°ÑØ½Ä"
 mes ""
 mes ""
 mes ""
@@ -48,13 +60,44 @@ color 0,170,170
 boxf 0,240,640,256
 color 255,255,255
 pos 0,240
-mes "					èª¬æ˜Ž					"
+mes "					à–¾					"
 color 0,0,0
 mes detail
 color 0,255,255
 boxf 0,386,640,400
+
+color 0,0,0
+box 0,0,640,16
+box 0,16,640,32
+box 0,80,640,96
+box 0,240,640,256
+box 0,386,640,400
 color 0,0,0
 pos 0,384
-mes "ã€€Z=ã‚²ãƒ¼ãƒ èµ·å‹•		X=READMEã‚’èª­ã‚€"
+mes "@Z=ƒQ[ƒ€‹N“®		X=README‚ð“Ç‚Þ"
 pos 0,96
 celput 1
+repeat
+stick key
+
+if key=2:game+=1
+if key=8:game-=1
+if game>8:game=8
+if game<2:game=2
+if game=1:gb=96
+if game=2:gb=192
+if game=3:gb=288
+if game=4:gb=384
+if game=5:gb=480
+if game=6:gb=576
+if game=7:gb=672
+if game=8:gb=768
+redraw 0,320,96,320,144
+color 0,255,0
+boxf 350,gb,640,gb+16
+pos 350,96
+color 0,0,0
+mes gamelist
+redraw 1,320,96,320,144
+await 1
+loop
