@@ -62,7 +62,6 @@ color 255,255,255
 pos 0,240
 mes "					説明					"
 color 0,0,0
-mes detail
 color 0,255,255
 boxf 0,386,640,400
 
@@ -78,26 +77,51 @@ mes "　Z=ゲーム起動		X=READMEを読む"
 pos 0,96
 celput 1
 repeat
-stick key
+font "ＭＳ ゴシック",16
 
-if key=2:game+=1
-if key=8:game-=1
+stick key
+if mousex>16 and mousex<56 and mousey>16 and mousey<32 and key=256 {
+	redraw 0,0,32,176,288
+	color 0,255,255
+	boxf 0,32,176,340
+	color 0,0,0
+	box 0,32,176,340
+	pos 16,48
+	color 255,255,255
+	mes "開く（O）"
+	mes "実行（R）．．．"
+	redraw 1,0,32,176,288
+
+	
+	}
+if key=2:game-=1
+if key=8:game+=1
 if game>8:game=8
-if game<2:game=2
-if game=1:gb=96
-if game=2:gb=192
-if game=3:gb=288
-if game=4:gb=384
-if game=5:gb=480
-if game=6:gb=576
-if game=7:gb=672
-if game=8:gb=768
-redraw 0,320,96,320,144
+if game<1:game=1
+if game=1:gb=96:notesel detail:noteload "detail.txt"
+if game=2:gb=112:notesel detail:noteload "detail2.txt"
+if game=3:gb=128:notesel detail:noteload "detail3.txt"
+if game=4:gb=144:notesel detail:noteload "detail4.txt"
+if game=5:gb=160:notesel detail:noteload "detail5.txt"
+if game=6:gb=176:notesel detail:noteload "detail6.txt"
+if game=7:gb=192:notesel detail:noteload "detail7.txt"
+if game=8:gb=208:notesel detail:noteload "detail8.txt"
+redraw 0,321,96,320,143
+color 255,255,255
+boxf 320,96,640,240
 color 0,255,0
 boxf 350,gb,640,gb+16
 pos 350,96
 color 0,0,0
 mes gamelist
-redraw 1,320,96,320,144
+redraw 1,320,96,320,143
+redraw 0,0,256,640,143
+color 255,255,255
+boxf 0,256,640,386
+color 0,0,0
+pos 0,256
+font "ＭＳ ゴシック",16
+mes detail
+redraw 1,0,256,640,143
 await 1
 loop
