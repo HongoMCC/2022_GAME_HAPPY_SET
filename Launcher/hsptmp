@@ -1,12 +1,12 @@
 //GAME_Launcer v1.0
 //Copyright (c) H.Taido 2022
 #module
-#deffunc box int x1, int y1, int x2, int y2
-line x1, y1, x2, y1
-line x1, y1, x1, y2
-line x1, y2, x2, y2
-line x2, y1, x2, y2
-return
+	#deffunc box int x1, int y1, int x2, int y2
+		line x1, y1, x2, y1
+		line x1, y1, x1, y2
+		line x1, y2, x2, y2
+		line x2, y1, x2, y2
+		return
 #global
 screen 0,640,400
 cls 4
@@ -21,11 +21,25 @@ mes ""
 mes "お待ち下さい..."
 wait 60
 detail=""
-celload "320x144.png",1
-notesel detail
-noteload "detail.txt"
+mes "値を初期化しました。"
+wait 10
 notesel gamelist
 noteload "gamelist.txt"
+mes "ゲームリストを読み込みました。"
+mes ""
+wait 5
+celload "320x144.png",1
+mes "ゲーム画像を読み込みました。"
+mes "302x144ドットの画像が利用可能です"
+wait 5
+notesel detail
+noteload "detail.txt"
+mes ""
+mes "ゲームの詳細を読み込みました。"
+wait 5
+mes ""
+mes "M.C.C Shellを起動中です..."
+wait 10
 game=1
 gb=96
 cls
@@ -77,9 +91,9 @@ mes "　Z=ゲーム起動		X=READMEを読む"
 pos 0,96
 celput 1
 repeat
-font "ＭＳ ゴシック",16
-
+	font "ＭＳ ゴシック",16
 stick key
+if key=2048:exec ".\\GAME"+game+"\\main.exe"
 if mousex>16 and mousex<56 and mousey>16 and mousey<32 and key=256 {
 	redraw 0,0,32,176,288
 	color 0,255,255
@@ -87,9 +101,10 @@ if mousex>16 and mousex<56 and mousey>16 and mousey<32 and key=256 {
 	color 0,0,0
 	box 0,32,176,340
 	pos 16,48
-	color 255,255,255
+	color 0,0,0
 	mes "開く（O）"
-	mes "実行（R）．．．"
+	mes "実行（L）．．．"
+	mes ""
 	redraw 1,0,32,176,288
 
 	
