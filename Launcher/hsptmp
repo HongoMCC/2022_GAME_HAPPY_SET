@@ -94,6 +94,7 @@ repeat
 	font "‚l‚r ƒSƒVƒbƒN",16
 stick key
 if key=2048:exec ".\\GAME"+game+"\\main.exe"
+if key=4096:exec ".\\GAME"+game+"\\readme.txt",16
 if mousex>16 and mousex<56 and mousey>16 and mousey<32 and key=256 {
 	redraw 0,0,32,176,288
 	color 0,255,255
