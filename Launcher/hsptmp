@@ -91,11 +91,15 @@ mes "　Z=ゲーム起動		X=READMEを読む"
 pos 0,96
 celput 1
 repeat
-	font "ＭＳ ゴシック",16
+font "ＭＳ ゴシック",16
+//ゲーム起動
 stick key
 if key=2048:exec ".\\GAME"+game+"\\main.exe"
 if key=4096:exec ".\\GAME"+game+"\\readme.txt",16
-if mousex>16 and mousex<56 and mousey>16 and mousey<32 and key=256 {
+//プルダウンメニュー
+
+//ﾌｧｲﾙ
+if mousex>16 and mousex<56 and mousey>16 and mousey<32 and key=256{
 	redraw 0,0,32,176,288
 	color 0,255,255
 	boxf 0,32,176,340
@@ -103,13 +107,107 @@ if mousex>16 and mousex<56 and mousey>16 and mousey<32 and key=256 {
 	box 0,32,176,340
 	pos 16,48
 	color 0,0,0
-	mes "開く（O）"
-	mes "実行（L）．．．"
-	mes ""
+	mes "実行（R）"
+	mes "README.TXTの閲覧（E）"
+	mes "―――――――――"
+	mes "終了（X）"
 	redraw 1,0,32,176,288
-
-	
+	repeat
+	stick key
+	getkey R,82
+	if R=1:exec ".\\GAME"+game+"\\main.exe"
+	getkey E,69
+	if E=1:exec ".\\GAME"+game+"\\readme.txt",16
+	getkey X,88
+	if X=1:end
+	if key=128:rewrite=1:break
+	if mousex>16 and mousex<176 and mousey>64 and mousey<80 and key=256:exec ".\\GAME"+game+"\\readme.txt",16:rewrite=1:break
+	if mousex>16 and mousex<176 and mousey>48 and mousey<64 and key=256:exec ".\\GAME"+game+"\\main.exe":rewrite=1:break
+	if mousex>16 and mousex<176 and mousey>96 and mousey<112 and key=256:end
+	await 1
+	loop
 	}
+//表示
+if  mousex>176 and mousex<221 and mousey>16 and mousey<32 and key=256{
+	redraw 0,168,32,500,298
+	color 0,255,255
+	boxf 168,32,310,376
+	color 0,0,0
+	box 168,32,310,376
+	pos 176,48
+	color 0,0,0
+	mes ""
+	mes ""
+	mes "――――――――"
+	mes "画面の再描画（E）"
+	redraw 1,168,32,500,298
+	repeat
+	stick key
+	getkey E,69
+	if E=1:rewrite=1:break
+	getkey X,88
+	if key=128:rewrite=1:break
+	if mousex>16 and mousex<176 and mousey>96 and mousey<112 and key=256:end
+	await 1
+	loop
+}
+//プルダウンここまで
+
+//再描画
+if rewrite=1:{
+gb=96
+cls
+title "M.C.C. ｼｪﾙ"
+color 0,0,170
+boxf 0,0,640,16
+color 0,255,255
+boxf 0,16,640,32
+color 0,170,170
+boxf 0,80,640,96
+pos 284,0
+color 255,255,255
+mes "M.C.C. ｼｪﾙ"
+color 0,0,0
+pos 0,16
+mes "　ﾌｧｲﾙ(F)  ｵﾌﾟｼｮﾝ(O)　表示(V)　ﾂﾘｰ(T)　ﾍﾙﾌﾟ(H)"
+mes "　"+dir_cur
+mes ""
+mes ""
+color 255,255,255
+pos 0,80
+mes "		ｻﾑﾈｲﾙ･ﾋﾟｸﾁｬ		|		ｹﾞｰﾑﾘｽﾄ"
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+mes ""
+color 0,170,170
+boxf 0,240,640,256
+color 255,255,255
+pos 0,240
+mes "					説明					"
+color 0,0,0
+color 0,255,255
+boxf 0,386,640,400
+
+color 0,0,0
+box 0,0,640,16
+box 0,16,640,32
+box 0,80,640,96
+box 0,240,640,256
+box 0,386,640,400
+color 0,0,0
+pos 0,384
+mes "　Z=ゲーム起動		X=READMEを読む"
+pos 0,96
+celput 1
+await 1
+rewrite=0
+	}
+//リスト操作
 if key=2:game-=1
 if key=8:game+=1
 if game>8:game=8
@@ -139,5 +237,6 @@ pos 0,256
 font "ＭＳ ゴシック",16
 mes detail
 redraw 1,0,256,640,143
+//
 await 1
 loop
