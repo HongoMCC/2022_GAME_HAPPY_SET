@@ -324,7 +324,11 @@ mes ""
 mes "（この操作は中止できません）"
 mes "しばらくお待ちください..."
 zipextract "BIN.zip",terget
-if  not(stat=0):mes "展開に失敗しました。リターンキーを押して下さい。":s=1:stat=a
+if stat!=0 {
+	mes "展開に失敗しました。リターンキーを押して下さい。"
+	s=1
+	a = stat
+}
 if stat=0:mes "展開に成功しました。リターンキーを押して下さい":s=0
 repeat
 stick key
