@@ -174,7 +174,7 @@ if oDrive("DriveType") == 0 : mes "│"+chrdrv+": 不明なドライブ　	    │"
 if oDrive("DriveType") == 1 : mes "│"+chrdrv+": ﾘﾑｰﾊﾞﾌﾞﾙ ﾃﾞｨｽｸ　	    │"
 if oDrive("DriveType") == 2 : mes "│"+chrdrv+": 固定ディスク装置	    │"
 if oDrive("DriveType") == 3 : mes "│"+chrdrv+": ﾈｯﾄﾜｰｸ ﾄﾞﾗｲﾌﾞ　 	    │"
-if oDrive("DriveType") == 4 : mes "│"+chrdrv+": CD-ROM　　　　　	    │"
+if oDrive("DriveType") == 4 : mes "│"+chrdrv+": 光学ﾃﾞｨｽｸﾄﾞﾗｲﾌﾞ		│"
 if oDrive("DriveType") == 5 : mes "│"+chrdrv+": RAMディスク　　 	    │"
 }
 }
@@ -217,8 +217,8 @@ mes ""
 mes "プログラムファイルを展開するディレクトリを指定します"
 mes "ルートディレクトリからの完全パスを正しく入力してください。"
 mes ""
-mes ""
-mes ""
+mes "Windows標準のダウンロード フォルダに展開する場合はＤを押してください"
+mes "Windwos標準のドキュメント フォルダに展開する場合はＣを押してください"
 mes ""
 mes ""
 mes ""
@@ -239,10 +239,16 @@ color 255,255,255
 pos 0,368
 mes "（ＥＳＣキーを押すと前の画面に戻ります）"
 s=0
+D=0
+C=0
 repeat
 stick key
 if key=32:terget=drv+":\\"+dir:break
 if key=128:goto *Hard1
+getkey D,68
+getkey C,67
+if D=1:terget="C:\\users\\"+sysinfo(1)+"\\Downloads":break
+if C=1:terget="C:\\users\\"+sysinfo(1)+"\\Documents":break
 await 1
 loop
 *check
@@ -323,7 +329,7 @@ mes ""
 mes ""
 mes "（この操作は中止できません）"
 mes "しばらくお待ちください..."
-zipextract "BIN.zip",terget
+zipextract "BIN.mcc",terget
 if stat!=0 {
 	mes "展開に失敗しました。リターンキーを押して下さい。"
 	s=1
