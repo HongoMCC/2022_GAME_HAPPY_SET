@@ -24,16 +24,18 @@ detail=""
 mes "値を初期化しました。"
 wait 10
 notesel gamelist
-noteload "gamelist.txt"
+noteload ".//lib//gamelist.txt"
+notesel max
+noteload ".//lib//max.txt"
 mes "ゲームリストを読み込みました。"
 mes ""
 wait 5
-celload "320x144.png",1
+gimg=1
+
 mes "ゲーム画像を読み込みました。"
-mes "302x144ドットの画像が利用可能です"
+mes "302x145ドットの画像が利用可能です"
 wait 5
 notesel detail
-noteload "detail.txt"
 mes ""
 mes "ゲームの詳細を読み込みました。"
 wait 5
@@ -54,6 +56,7 @@ pos 284,0
 color 255,255,255
 mes "M.C.C. ｼｪﾙ"
 color 0,0,0
+font "ＭＳ ゴシック",16
 pos 0,16
 mes "　ﾌｧｲﾙ(F)  ｵﾌﾟｼｮﾝ(O)　表示(V)　ﾂﾘｰ(T)　ﾍﾙﾌﾟ(H)"
 mes "　"+dir_cur
@@ -89,13 +92,12 @@ color 0,0,0
 pos 0,384
 mes "　Z=ゲーム起動		X=READMEを読む"
 pos 0,96
-celput 1
 repeat
 font "ＭＳ ゴシック",16
 //ゲーム起動
 stick key
-if key=2048:exec ".\\GAME"+game+"\\main.exe"
-if key=4096:exec ".\\GAME"+game+"\\readme.txt",16
+if key=2048:exec ".\\lib\\GAME"+game+"\\main.exe"
+if key=4096:exec ".\\lib\\GAME"+game+"\\readme.txt",16
 //プルダウンメニュー
 
 //ﾌｧｲﾙ
@@ -105,6 +107,7 @@ if mousex>16 and mousex<56 and mousey>16 and mousey<32 and key=256{
 	boxf 0,32,176,340
 	color 0,0,0
 	box 0,32,176,340
+	font "ＭＳ ゴシック",16
 	pos 16,48
 	color 0,0,0
 	mes "実行（R）"
@@ -115,9 +118,9 @@ if mousex>16 and mousex<56 and mousey>16 and mousey<32 and key=256{
 	repeat
 	stick key
 	getkey R,82
-	if R=1:exec ".\\GAME"+game+"\\main.exe"
+	if R=1:exec ".//lib//GAME"+game+"//main.exe"
 	getkey E,69
-	if E=1:exec ".\\GAME"+game+"\\readme.txt",16
+	if E=1:exec ".//lib//GAME"+game+"//readme.txt",16
 	getkey X,88
 	if X=1:end
 	if key=128:rewrite=1:break
@@ -154,6 +157,7 @@ if  mousex>176 and mousex<221 and mousey>16 and mousey<32 and key=256{
 //プルダウンここまで
 
 //再描画
+*re
 if rewrite=1:{
 gb=96
 cls
@@ -203,7 +207,7 @@ color 0,0,0
 pos 0,384
 mes "　Z=ゲーム起動		X=READMEを読む"
 pos 0,96
-celput 1
+
 await 1
 rewrite=0
 	}
@@ -212,14 +216,14 @@ if key=2:game-=1
 if key=8:game+=1
 if game>8:game=8
 if game<1:game=1
-if game=1:gb=96:notesel detail:noteload "detail.txt"
-if game=2:gb=112:notesel detail:noteload "detail2.txt"
-if game=3:gb=128:notesel detail:noteload "detail3.txt"
-if game=4:gb=144:notesel detail:noteload "detail4.txt"
-if game=5:gb=160:notesel detail:noteload "detail5.txt"
-if game=6:gb=176:notesel detail:noteload "detail6.txt"
-if game=7:gb=192:notesel detail:noteload "detail7.txt"
-if game=8:gb=208:notesel detail:noteload "detail8.txt"
+if game=1:gb=96:notesel detail:noteload ".//lib//GAME"+game+"//detail.txt"
+if game=2:gb=112:notesel detail:noteload ".//lib//GAME"+game+"//detail.txt"
+if game=3:gb=128:notesel detail:noteload ".//lib//GAME"+game+"//detail.txt"
+if game=4:gb=144:notesel detail:noteload ".//lib//GAME"+game+"//detail.txt"
+if game=5:gb=160:notesel detail:noteload ".//lib//GAME"+game+"//detail.txt"
+if game=6:gb=176:notesel detail:noteload ".//lib//GAME"+game+"//detail.txt"
+if game=7:gb=192:notesel detail:noteload ".//lib//GAME"+game+"//detail.txt"
+if game=8:gb=208:notesel detail:noteload ".//lib//GAME"+game+"//detail.txt"
 redraw 0,321,96,320,143
 color 255,255,255
 boxf 320,96,640,240
@@ -237,6 +241,17 @@ pos 0,256
 font "ＭＳ ゴシック",16
 mes detail
 redraw 1,0,256,640,143
+redraw 0,0,96,320,145
+pos 0,96
+if game=1:picload ".//lib//GAME"+game+"//320x145.png",1
+if game=2:picload ".//lib//GAME"+game+"//320x145.png",1
+if game=3:picload ".//lib//GAME"+game+"//320x145.png",1
+if game=4:picload ".//lib//GAME"+game+"//320x145.png",1
+if game=5:picload ".//lib//GAME"+game+"//320x145.png",1
+if game=6:picload ".//lib//GAME"+game+"//320x145.png",1
+if game=7:picload ".//lib//GAME"+game+"//320x145.png",1
+if game=8:picload ".//lib//GAME"+game+"//320x145.png",1
+redraw 1,0,96,320,145
 //
 await 1
 loop
