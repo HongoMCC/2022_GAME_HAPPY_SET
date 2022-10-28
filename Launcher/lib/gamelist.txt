@@ -2,7 +2,7 @@
 よけげー
 氷上の秘塔
 一次元セルオートマトン
-GAME5
-GAME6
-GAME7
-GAME8
+Bullet Galaxy
+Morse
+Danmaku-ATO-
+Fourier
